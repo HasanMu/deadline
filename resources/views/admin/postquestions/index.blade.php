@@ -40,17 +40,17 @@
 
 @section('css')
      <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/Ionicons/css/ionicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('admin/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{ asset('admin/dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/skins/_all-skins.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <style>
     .select2-selection__choice {
@@ -60,28 +60,28 @@
 
 @push('js')
     <!-- jQuery 3 -->
-    <script src="{{ asset('admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="{{ asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- FastClick -->
-    <script src="{{ asset('admin/bower_components/fastclick/lib/fastclick.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/fastclick/lib/fastclick.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
     <!-- Sparkline -->
-    <script src="{{ asset('admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
     <!-- DataTables -->
-    <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <!-- bootstrap datepicker -->
-    <script src="{{ asset('admin/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <!-- bootstrap color picker -->
-    <script src="{{ asset('admin/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
     <!-- SlimScroll -->
-    <script src="{{ asset('admin/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('backend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}">
-    <script src="{{ asset('admin/ckeditor5-build-decoupled-document/ckeditor.js') }}">
+    <script src="{{ asset('backend/ckeditor5-build-decoupled-document/ckeditor.js') }}">
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
+    <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
     
 
     <script type="text/javascript">
@@ -118,7 +118,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/admin/users',
+                    url: '/backend/users',
                     method: 'GET',
                     success: function (res) {
                         $.each(res.data, function(k, v) {
@@ -136,7 +136,7 @@
                 })
 
                 $.ajax({
-                    url: '/admin/categories',
+                    url: '/backend/categories',
                     method: 'GET',
                     success: function (res) {
                         $.each(res.data, function(k, v) {
@@ -154,7 +154,7 @@
                 })
 
                 $.ajax({
-                    url: '/admin/tags',
+                    url: '/backend/tags',
                     method: 'GET',
                     success: function (res) {
                         $.each(res.data, function(k, v) {
@@ -177,7 +177,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/admin/post/questions',
+                    url: '/backend/post/questions',
                     method: "POST",
                     dataType: "JSON",
                     contentType: false,
@@ -200,7 +200,7 @@
             //     var id = $(this).data('id');
 
             //     $.ajax({
-            //         url: '/admin/tags/' + id,
+            //         url: '/backend/tags/' + id,
             //         method: 'GET',
             //         success: function (res) {
             //             $('input[id="e-id"]').val(res.data.id);
@@ -220,7 +220,7 @@
                 var judul = $(this).data('judul');
 
                 $.ajax({
-                    url: '/admin/post/questions/' + id,
+                    url: '/backend/post/questions/' + id,
                     method: 'GET',
                     success: function (res) {
                        $('input[id="id-h-pq"]').val(id);
@@ -237,7 +237,7 @@
             //     e.preventDefault();
 
             //     $.ajax({
-            //         url: '/admin/tags/'+$('#e-id').val(),
+            //         url: '/backend/tags/'+$('#e-id').val(),
             //         method: 'PUT',
             //         data: $('#e-tag').serialize(),
             //         success: function (res) {
@@ -255,7 +255,7 @@
                 var id = $('#id-h-pq').val()
 
                 $.ajax({
-                    url: '/admin/post/questions/'+id,
+                    url: '/backend/post/questions/'+id,
                     method: 'DELETE',
                     success: function (res) {
                         alert(res.message)
