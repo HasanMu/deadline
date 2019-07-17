@@ -33,6 +33,17 @@
             </div>
         </div>
     
+        @guest
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">List Post</div>
+
+                <div class="card-body">
+                    
+                </div>
+            </div>
+        </div>
+        @else
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Buat Post</div>
@@ -56,6 +67,7 @@
                 </div>
             </div>
         </div>
+        @endguest
 
         <div class="col-md-4">
             <div class="card">
@@ -100,6 +112,8 @@
                     url: '/admin/users',
                     method: 'GET',
                     success: function (res) {
+                        console.log(res);
+                        
                         $.each(res.data, function(k, v) {
                             $('#user_id').append(
                                 `
@@ -118,6 +132,7 @@
                     url: '/admin/categories',
                     method: 'GET',
                     success: function (res) {
+                        console.log(res);
                         $.each(res.data, function(k, v) {
                             $('#category_id').append(
                                 `
@@ -136,6 +151,7 @@
                     url: '/admin/tags',
                     method: 'GET',
                     success: function (res) {
+                        console.log(res);
                         $.each(res.data, function(k, v) {
                             $('#tag_id').append(
                                 `
