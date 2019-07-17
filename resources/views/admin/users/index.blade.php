@@ -124,7 +124,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/users',
+                    url: '/admin/users',
                     method: 'POST',
                     data: c_user.serialize(),
                     success: function (res) {
@@ -143,7 +143,7 @@
                 var id = $(this).data('id');
 
                 $.ajax({
-                    url: '/backend/users/' + id,
+                    url: '/admin/users/' + id,
                     method: 'GET',
                     success: function (res) {
                         $('input[id="e-id"]').val(res.data.id);
@@ -169,7 +169,7 @@
                 var nama = $(this).data('nama');
 
                 $.ajax({
-                    url: '/backend/users/' + id,
+                    url: '/admin/users/' + id,
                     method: 'GET',
                     success: function (res) {
                        $('input[id="id-h-user"]').val(id);
@@ -186,7 +186,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/users/'+$('#e-id').val(),
+                    url: '/admin/users/'+$('#e-id').val(),
                     method: 'PUT',
                     data: $('#e-user').serialize(),
                     success: function (res) {
@@ -204,7 +204,7 @@
                 var id = $('#id-h-user').val()
 
                 $.ajax({
-                    url: '/backend/users/'+id,
+                    url: '/admin/users/'+id,
                     method: 'DELETE',
                     success: function (res) {
                         alert('Data berhasil dihapus')

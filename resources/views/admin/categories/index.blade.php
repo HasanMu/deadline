@@ -102,7 +102,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/categories',
+                    url: '/admin/categories',
                     method: 'POST',
                     data: c_kategori.serialize(),
                     success: function (res) {
@@ -121,7 +121,7 @@
                 var id = $(this).data('id');
 
                 $.ajax({
-                    url: '/backend/categories/' + id,
+                    url: '/admin/categories/' + id,
                     method: 'GET',
                     success: function (res) {
                         $('input[id="e-id"]').val(res.data.id);
@@ -140,7 +140,7 @@
                 var nama = $(this).data('nama');
 
                 $.ajax({
-                    url: '/backend/categories/' + id,
+                    url: '/admin/categories/' + id,
                     method: 'GET',
                     success: function (res) {
                        $('input[id="id-h-kategori"]').val(id);
@@ -157,7 +157,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/categories/'+$('#e-id').val(),
+                    url: '/admin/categories/'+$('#e-id').val(),
                     method: 'PUT',
                     data: $('#e-kategori').serialize(),
                     success: function (res) {
@@ -175,7 +175,7 @@
                 var id = $('#id-h-kategori').val()
 
                 $.ajax({
-                    url: '/backend/categories/'+id,
+                    url: '/admin/categories/'+id,
                     method: 'DELETE',
                     success: function (res) {
                         alert('Data berhasil dihapus')

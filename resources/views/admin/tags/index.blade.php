@@ -102,7 +102,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/tags',
+                    url: '/admin/tags',
                     method: 'POST',
                     data: c_tag.serialize(),
                     success: function (res) {
@@ -121,7 +121,7 @@
                 var id = $(this).data('id');
 
                 $.ajax({
-                    url: '/backend/tags/' + id,
+                    url: '/admin/tags/' + id,
                     method: 'GET',
                     success: function (res) {
                         $('input[id="e-id"]').val(res.data.id);
@@ -140,7 +140,7 @@
                 var nama = $(this).data('nama');
 
                 $.ajax({
-                    url: '/backend/tags/' + id,
+                    url: '/admin/tags/' + id,
                     method: 'GET',
                     success: function (res) {
                        $('input[id="id-h-tag"]').val(id);
@@ -157,7 +157,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/tags/'+$('#e-id').val(),
+                    url: '/admin/tags/'+$('#e-id').val(),
                     method: 'PUT',
                     data: $('#e-tag').serialize(),
                     success: function (res) {
@@ -175,7 +175,7 @@
                 var id = $('#id-h-tag').val()
 
                 $.ajax({
-                    url: '/backend/tags/'+id,
+                    url: '/admin/tags/'+id,
                     method: 'DELETE',
                     success: function (res) {
                         alert(res.message)

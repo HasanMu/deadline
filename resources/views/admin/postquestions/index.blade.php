@@ -118,7 +118,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/users',
+                    url: '/admin/users',
                     method: 'GET',
                     success: function (res) {
                         $.each(res.data, function(k, v) {
@@ -136,7 +136,7 @@
                 })
 
                 $.ajax({
-                    url: '/backend/categories',
+                    url: '/admin/categories',
                     method: 'GET',
                     success: function (res) {
                         $.each(res.data, function(k, v) {
@@ -154,7 +154,7 @@
                 })
 
                 $.ajax({
-                    url: '/backend/tags',
+                    url: '/admin/tags',
                     method: 'GET',
                     success: function (res) {
                         $.each(res.data, function(k, v) {
@@ -177,7 +177,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: '/backend/post/questions',
+                    url: '/admin/post/questions',
                     method: "POST",
                     dataType: "JSON",
                     contentType: false,
@@ -200,7 +200,7 @@
             //     var id = $(this).data('id');
 
             //     $.ajax({
-            //         url: '/backend/tags/' + id,
+            //         url: '/admin/tags/' + id,
             //         method: 'GET',
             //         success: function (res) {
             //             $('input[id="e-id"]').val(res.data.id);
@@ -220,7 +220,7 @@
                 var judul = $(this).data('judul');
 
                 $.ajax({
-                    url: '/backend/post/questions/' + id,
+                    url: '/admin/post/questions/' + id,
                     method: 'GET',
                     success: function (res) {
                        $('input[id="id-h-pq"]').val(id);
@@ -237,7 +237,7 @@
             //     e.preventDefault();
 
             //     $.ajax({
-            //         url: '/backend/tags/'+$('#e-id').val(),
+            //         url: '/admin/tags/'+$('#e-id').val(),
             //         method: 'PUT',
             //         data: $('#e-tag').serialize(),
             //         success: function (res) {
@@ -255,7 +255,7 @@
                 var id = $('#id-h-pq').val()
 
                 $.ajax({
-                    url: '/backend/post/questions/'+id,
+                    url: '/admin/post/questions/'+id,
                     method: 'DELETE',
                     success: function (res) {
                         alert(res.message)
