@@ -37,11 +37,13 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::group(['middleware' => 'cors'], function () {
         Route::group(['middleware' => 'auth:admin', 'as' => 'admin.'], function(){
-            Route::resource('/users', 'Admin\UserController');
-            Route::resource('/categories', 'Admin\CategoryController');
-            Route::resource('/tags', 'Admin\TagController');
-            Route::group(['prefix' => 'post'], function () {
+            Route::group(['middleware' => ['auth:admin']], function () {
+                Route::resource('/users', 'Admin\UserController');
+                Route::resource('/categories', 'Admin\CategoryController');
+                Route::resource('/tags', 'Admin\TagController');
+                Route::group(['prefix' => 'post'], function () {
                 Route::resource('/questions', 'Admin\PostQuestionController');
+            });
             });
         });
     });

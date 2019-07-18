@@ -10,7 +10,10 @@
       <div class="modal-body">
         <form id="c-pertanyaan" enctype="multipart/form-data">
             <div class="form-group">
+                @guest
+                @else
                 <input id="id" type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                @endguest
                 <label for="judul" class="col-form-label">Judul</label>
                 <input type="text" name="judul" class="form-control" required id="judul">
             </div>
@@ -45,4 +48,20 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="m-profile" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-profile">Tambah Alamat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="content-address"></div>
+            <div class="content-bio"></div>
+        </div>
+    </div>
 </div>

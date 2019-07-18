@@ -25,11 +25,37 @@
                         @if(!Auth::user()->foto)
                             <center>
                                 <img src="/assets/deafult-avatar.png" class="d-flex justify-content-center" width="100px" height="100px">
+                                <p></p>
                             </center>
+                                <div class="d-flex justify-content-left" style="width: 100%;">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <b>Jenis kelamin</b><br>
+                                            {{ Auth::user()->gender }}
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Alamat</b><br>
+                                            @if(!Auth::user()->address)
+                                                <a class="btn btn-link address" href="#" role="button" data-toggle="modal" data-target="#m-profile">Klik untuk menambahkan alamat</a>
+                                            @else
+                                                {{Auth::user()->address}}
+                                            @endif
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Bio</b>
+                                            @if(!Auth::user()->bio)
+                                                <a class="btn btn-link bio" href="#" role="button" data-toggle="modal" data-target="#m-profile">Klik untuk menambahkan bio</a>
+                                            @else
+                                                {{Auth::user()->bio}}
+                                            @endif
+                                        </li>
+                                        <li class="list-group-item">Porta ac consectetur ac</li>
+                                        <li class="list-group-item">Vestibulum at eros</li>
+                                    </ul>
+                                </div>
                         @else
                             <img src="/assets/{{ Auth::user()->foto }}" class="d-flex justify-content-center">
                             <div class="d-flex justify-content-center">
-
 
                             </div>
                         @endif
@@ -230,6 +256,7 @@
                 }
             })
 
+            // CREATE Question
             $('#c-pertanyaan').on('submit', function (e) {
                 var formData = new FormData($('#c-pertanyaan')[0]);
                 e.preventDefault();
@@ -252,6 +279,77 @@
                         console.log(err);
                     }
                 })
+            })
+
+            // Show MODAL Profile BIO
+            $('.bio').on('click', function(e) {
+                e.preventDefault();
+
+                $('.mt-profile').html('Tambahkan Bio');
+
+                $('.content-bio').html(`<div></div>`);
+                $('.content-bio').append(
+                    `
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" class="form-control" type="text" name="bio" rows="4" cols="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                    `
+                );
+
+                $('.content-address').html(`<div></div>`);
+            })
+
+            // Show MODAL Profile ADDRESS
+            $('.address').on('click', function(e) {
+                e.preventDefault();
+
+                $('.mt-profile').html('Tambahkan Alamat');
+
+                $('.content-address').html(``);
+                $('.content-address').append(
+                    `
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="bio">Alamat</label>
+                                <textarea id="c-address" class="form-control" type="text" name="address" rows="4" cols="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Tutup</button>
+                            <button type="button" class="btn btn-success" id="sv-address">Simpan</button>
+                        </div>
+                    `
+                );
+
+                $('.content-bio').append(``);
+                $('.content-bio').html(`<div></div>`);
+            });
+
+            $('#sv-address').on('.content-address', 'click', function (e) {
+
+                alert(123)
+                // $.ajax({
+                //     url: '/api/v1/users/'+ {{ Auth::user()->id}},
+                //     method: 'PUT',
+                //     data: $('#c-address').serialize(),
+                //     success: function (res) {
+                //         console.log(res)
+                //         $('#fm-create-address')[0].reset();
+                //         alert(res.message);
+                //         location.reload();
+                //     },
+                //     error: function (err) {
+                //         console.log(err)
+                //     }
+                // })
+
             })
         })
     </script>
