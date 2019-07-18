@@ -57,15 +57,15 @@
                             <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('Jenis Kelamin') }}</label>
 
                             <div class="form-check form-check-inline">
-                                <input name="gender" class="form-check-input @error('gender') is-invalid @enderror" type="radio" value="Laki - Laki" name="inlineRadioOptions" id="gender" value="option1">
+                                <input name="gender" class="form-check-input @error('gender') is-invalid @enderror" type="radio" value="Laki - Laki" name="gender" id="gender" value="option1">
                                 <label class="form-check-label" for="gender">Laki - Laki</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input name="gender" class="form-check-input @error('gender') is-invalid @enderror" type="radio" value="Perempuan" name="inlineRadioOptions" id="gender" value="option2">
+                                <input name="gender" class="form-check-input @error('gender') is-invalid @enderror" type="radio" value="Perempuan" name="gender" id="gender" value="option2">
                                 <label class="form-check-label" for="gender">Perempuan</label>
                             </div>
 
-                            @error('dob')
+                            @error('gender')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -77,7 +77,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Alamat') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="address" type="text" class="form-control @error('address') is-invalid @enderror" cols="10" rows="3" name="address"></textarea>
+                                <textarea name="address" id="address" type="text" class="form-control @error('address') is-invalid @enderror" cols="10" rows="3"></textarea>
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
