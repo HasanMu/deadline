@@ -98,7 +98,7 @@
                                 @endif
                                     <div class="media-body">
                                         <h5 class="mt-0 mb-1">{{ $pq->judul }}</h5>
-                                        {!! $pq->konten !!}
+                                        {{ $pq->konten }}
                                     </div>
                             </li>
                             @endforeach
@@ -335,20 +335,7 @@
             $('#sv-address').on('.content-address', 'click', function (e) {
 
                 alert(123)
-                // $.ajax({
-                //     url: '/api/v1/users/'+ {{ Auth::user()->id}},
-                //     method: 'PUT',
-                //     data: $('#c-address').serialize(),
-                //     success: function (res) {
-                //         console.log(res)
-                //         $('#fm-create-address')[0].reset();
-                //         alert(res.message);
-                //         location.reload();
-                //     },
-                //     error: function (err) {
-                //         console.log(err)
-                //     }
-                // })
+
 
             })
         })
