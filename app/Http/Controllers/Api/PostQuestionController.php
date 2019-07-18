@@ -34,7 +34,33 @@ class PostQuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pq = new PostQuestion;
+
+        $pq->judul = $request->judul;
+        $pq->slug = str_slug($request->judul);
+        $pq->konten = $request->konten;
+        $pq->user_id = $request->user_id;
+        $pq->category_id = $request->category_id;
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $destinationPatch = public_path().'/assets/questions/img/';
+            $filename = str_random(6).'_'.$file->getClientOriginalName();
+            $uploadSuccess = $file->move($destinationPatch, $filename);
+            $pq->foto = $filename;
+        }
+
+        $pq->save();
+        $pq->tags()->attach($request->tag_id);
+
+        $response = [
+            'success'   => true,
+            'data'      => $pq,
+            'message'   => 'Berhasil ditambah!'
+        ];
+
+        return response()->json($response, 200);
+
     }
 
     /**

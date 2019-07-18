@@ -75,10 +75,10 @@
 
     <script type="text/javascript">
         $(function () {
-            
+
             $.ajaxSetup({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
                 }
             });
 
@@ -110,7 +110,7 @@
                     error: function (err) {
                         console.log(err)
                     }
-                })  
+                })
             })
 
             $('.data-tags').on('click', '.edit-tag-per-id', function (e) {
@@ -177,7 +177,7 @@
                     success: function (res) {
                         alert(res.message)
                         location.reload();
-                    }, 
+                    },
                     error: function (err) {
                         console.log(err)
                     }

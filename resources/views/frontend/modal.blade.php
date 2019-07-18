@@ -10,12 +10,13 @@
       <div class="modal-body">
         <form id="c-pertanyaan" enctype="multipart/form-data">
             <div class="form-group">
+                <input id="id" type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <label for="judul" class="col-form-label">Judul</label>
-                <input type="text" class="form-control" required id="judul">
+                <input type="text" name="judul" class="form-control" required id="judul">
             </div>
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Isi</label>
-                <textarea class="form-control pell-content" required id="message-text" rows="4" cols="5"></textarea>
+                <textarea class="form-control pell-content" required id="message-text" rows="4" name="konten" cols="5"></textarea>
             </div>
             <div class="row">
                 <div class="col">
@@ -31,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="foto" class="col-form-label">Foto</label>
-                <input type="file" class="form-control" required id="c-foto">
+                <input type="file" name="foto" class="form-control" required id="c-foto">
                 <small>* Jika Diperlukan</small>
                 <p></p><span></span>
                 <img class="img-fluid" src="" alt="" id="c-prev-img">

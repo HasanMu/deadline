@@ -213,7 +213,9 @@
                                 <div class="card-footer text-muted">
                                     <div class="d-flex flex-row bd-highlight mb-1">
                                         <div class="p-1 bd-highlight">${v.created_at}</div>
-                                        <div class="p-1 bd-highlight">Flex item 3</div>
+                                        <div class="p-1 bd-highlight">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -226,6 +228,30 @@
                     console.log(err);
 
                 }
+            })
+
+            $('#c-pertanyaan').on('submit', function (e) {
+                var formData = new FormData($('#c-pertanyaan')[0]);
+                e.preventDefault();
+
+                $.ajax({
+                    url: '/api/v1/post/questions',
+                    method: 'POST',
+                    dataType: "JSON",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    cache: true,
+                    success: function (res) {
+                        $('#c-pertanyaan')[0].reset();
+                        alert(res.message);
+                        console.log(res)
+                        location.reload();
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
             })
         })
     </script>
