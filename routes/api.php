@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
+    Route::apiResource('/users', 'Api\UserController');
+    Route::apiResource('/categories', 'Api\CategoryController');
+    Route::apiResource('/tags', 'Api\TagController');
+    Route::group(['prefix' => 'post'], function () {
+        Route::apiResource('/questions', 'Api\PostQuestionController');
+    });
+});

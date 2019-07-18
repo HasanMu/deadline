@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('frontend.modal')
 <div class="container-fluid">
     <div class="row">
 
@@ -27,47 +28,30 @@
                             </center>
                         @else
                             <img src="/assets/{{ Auth::user()->foto }}" class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center">
+
+
+                            </div>
                         @endif
                     @endguest
                 </div>
             </div>
         </div>
-    
-        @guest
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">List Post</div>
 
-                <div class="card-body">
-                    
-                </div>
-            </div>
+        <div class="col-md-4">
+        @guest
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Halo!</strong> Mari bergabung bersama kami untuk lebih baik di masa yang akan datang!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         @else
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">Buat Post</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <div class="form-group">
-                        <label>Kategori</label>
-                        <select name="category_id" id="category_id" class="form-control"></select>
-                    </div>
-                    <div class="form-group">
-                        <label>Tag</label>
-                        <select name="tag_id[]" id="tag_id" class="form-control" multiple></select>
-                    </div>
-
-                    <textarea class="form-control" rows="6" cols="3"></textarea>
-                </div>
-            </div>
-        </div>
+        <button class="btn btn-success" type="button" data-target="#buat-pertanyaan" data-toggle="modal"><i class="fa fa-plus"></i> &nbsp;Buat Post</button>
+        <p></p>
         @endguest
+            <div class="data-pq"></div>
+        </div>
 
         <div class="col-md-4">
             <div class="card">
@@ -75,13 +59,24 @@
 
                 <div class="card-body">
                     <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active">
-                            Cras justo odio
-                        </button>
-                        <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
-                        <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
-                        <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
-                        <button type="button" class="list-group-item list-group-item-action" disabled>Vestibulum at eros</button>
+                        @php
+                            $postquestion = \App\PostQuestion::all();
+                        @endphp
+                        <ul class="list-unstyled">
+                            @foreach($postquestion as $pq)
+                            <li class="media">
+                                @if(!$pq->foto)
+                                    <img src="..." class="mr-3" alt="...">
+                                @else
+                                    <button class="badge badge-danger" style="height: 64px; width: 64px; margin-right: 10px">BT</button>
+                                @endif
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">{{ $pq->judul }}</h5>
+                                        {!! $pq->konten !!}
+                                    </div>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -97,8 +92,26 @@
     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('#tag_id').select2();
+            $('#c-tag_id').select2();
 
+            // Image Preview Before Create Question
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                    $('#c-prev-img').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#c-foto").change(function() {
+                readURL(this);
+            });
+
+            // Setup Header
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -108,63 +121,135 @@
                 }
             });
 
+            //Get Users
             $.ajax({
-                    url: '/admin/users',
-                    method: 'GET',
-                    success: function (res) {
-                        console.log(res);
-                        
-                        $.each(res.data, function(k, v) {
-                            $('#user_id').append(
-                                `
-                                <option value="${v.id}">${v.name}</option>
-                                `
-                            );
-                        })
-                    },
-                    error: function (err) {
-                        console.log(err);
+                url: '/api/v1/users',
+                method: 'GET',
+                success: function (res) {
+                    console.log(res);
 
-                    }
-                })
+                    $.each(res.data, function(k, v) {
+                        $('#c-user_id').append(
+                            `
+                            <option value="${v.id}">${v.name}</option>
+                            `
+                        );
+                    })
+                },
+                error: function (err) {
+                    console.log(err);
 
-                $.ajax({
-                    url: '/admin/categories',
-                    method: 'GET',
-                    success: function (res) {
-                        console.log(res);
-                        $.each(res.data, function(k, v) {
-                            $('#category_id').append(
-                                `
-                                <option value="${v.id}">${v.nama}</option>
-                                `
-                            );
-                        })
-                    },
-                    error: function (err) {
-                        console.log(err);
+                }
+            })
 
-                    }
-                })
+            // GET Categories
+            $.ajax({
+                url: '/api/v1/categories',
+                method: 'GET',
+                success: function (res) {
+                    console.log(res);
+                    $.each(res.data, function(k, v) {
+                        $('#c-category_id').append(
+                            `
+                            <option value="${v.id}">${v.nama}</option>
+                            `
+                        );
+                    })
+                },
+                error: function (err) {
+                    console.log(err);
 
-                $.ajax({
-                    url: '/admin/tags',
-                    method: 'GET',
-                    success: function (res) {
-                        console.log(res);
-                        $.each(res.data, function(k, v) {
-                            $('#tag_id').append(
-                                `
-                                <option value="${v.id}">${v.nama}</option>
-                                `
-                            );
-                        })
-                    },
-                    error: function (err) {
-                        console.log(err);
+                }
+            })
 
-                    }
-                })
+            // GET Tags
+            $.ajax({
+                url: '/api/v1/tags',
+                method: 'GET',
+                success: function (res) {
+                    console.log(res);
+                    $.each(res.data, function(k, v) {
+                        $('#c-tag_id').append(
+                            `
+                            <option value="${v.id}">${v.nama}</option>
+                            `
+                        );
+                    })
+                },
+                error: function (err) {
+                    console.log(err);
+
+                }
+            })
+
+            // GET Questions
+            $.ajax({
+                url: '/api/v1/post/questions',
+                method: 'GET',
+                success: function (res) {
+                    console.log(res);
+                    $.each(res.data, function(k, v) {
+                        $('.data-pq').append(
+                            `
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between">
+                                        <b>${v.judul}</b>
+                                        <div class="justify-content-end">
+                                            <span class="badge badge-danger">${v.status}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="media">
+                                        <img src="/assets/deafult-avatar.png" class="mr-3" style="width: 50px; height: 50px;" alt="...">
+                                        <div class="media-body">
+                                            <h5 class="mt-0">${v.user.name}</h5>
+                                            ${v.konten}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <div class="d-flex flex-row bd-highlight mb-1">
+                                        <div class="p-1 bd-highlight">${v.created_at}</div>
+                                        <div class="p-1 bd-highlight">Flex item 3</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            `
+                        );
+                    })
+                },
+                error: function (err) {
+                    console.log(err);
+
+                }
+            })
         })
     </script>
 @endpush
+{{-- <div class="col-md-4">
+    <div class="card">
+        <div class="card-header">Buat Post</div>
+
+        <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <div class="form-group">
+                <label>Kategori</label>
+                <select name="category_id" id="category_id" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label>Tag</label>
+                <select name="tag_id[]" id="tag_id" class="form-control" multiple></select>
+            </div>
+
+            <textarea class="form-control" rows="6" cols="3"></textarea>
+        </div>
+    </div>
+</div> --}}

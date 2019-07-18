@@ -18,6 +18,7 @@ class CreatePostQuestionsTable extends Migration
             $table->string('judul');
             $table->string('foto')->nullable();
             $table->text('konten');
+            $table->enum('status', ['Belum Terjawab', 'Kurang Puas', 'Terjawab'])->default('Belum Terjawab');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
 

@@ -95,7 +95,7 @@
 
             $('#tag_id').select2({});
 
-            CKEDITOR.replace('konten')
+            // CKEDITOR.replace('konten')
 
             var table = $('#dataTable').DataTable({
                 processing: true,
@@ -265,21 +265,6 @@
             })
 
         });
-    </script>
-
-    <script>
-        DecoupledEditor
-            .create(document.querySelector('#konten'),{
-                // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-            })
-            .then( editor => {
-                const toolbarContainer = document.querySelector( 'main .toolbar-container' );
-                toolbarContainer.prepend( editor.ui.view.toolbar.element );
-                window.editor = editor;
-            })
-            .catch( err => {
-                console.error( err.stack );
-            });
     </script>
 
 @endpush

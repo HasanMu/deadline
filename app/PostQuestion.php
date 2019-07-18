@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Overtrue\LaravelFollow\Traits\CanBeLiked;
 use Illuminate\Database\Eloquent\Model;
 
 class PostQuestion extends Model
 {
+    use CanBeLiked;
+
     public function tags()
     {
         return $this->belongsToMany('App\Tag', 'postsquestions_tags', 'postquestion_id', 'tags_id');
