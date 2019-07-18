@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label for="foto" class="col-form-label">Foto</label>
-                <input type="file" name="foto" class="form-control" required id="c-foto">
+                <input type="file" name="foto" class="form-control" id="c-foto">
                 <small>* Jika Diperlukan</small>
                 <p></p><span></span>
                 <img class="img-fluid" src="" alt="" id="c-prev-img">
