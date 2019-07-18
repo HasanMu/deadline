@@ -230,7 +230,8 @@
                                         <img src="/assets/deafult-avatar.png" class="mr-3" style="width: 50px; height: 50px;" alt="...">
                                         <div class="media-body">
                                             <h5 class="mt-0">${v.user.name}</h5>
-                                            ${v.konten}
+                                            <img class="img-fluid" src="/assets/questions/img/${v.foto}" style="width: 100%; height: 100px;">
+                                            <p>${v.konten}</p>
                                         </div>
                                     </div>
                                 </div>
