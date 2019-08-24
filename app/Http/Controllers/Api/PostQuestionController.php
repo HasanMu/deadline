@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PostQuestion;
@@ -15,7 +16,7 @@ class PostQuestionController extends Controller
      */
     public function index()
     {
-        $data = PostQuestion::with('user')->latest()->get();
+        $data = PostQuestion::with('user', 'category', 'tags')->latest()->get();
 
         $response = [
             'success'   => true,
@@ -71,7 +72,17 @@ class PostQuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = PostQuestion::with('user', 'category', 'tags')->findOrFail($id);
+        $categories = Category::all();
+
+        $response = [
+            'success'   => true,
+            'data'      => $data,
+            'data_cat'  => $categories,
+            'message'   => 'Data postingan '.$data->judul
+        ];
+
+        return response()->json($response, 200);
     }
 
     /**
@@ -83,7 +94,7 @@ class PostQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return ['message' => 'Masuk update!'];
     }
 
     /**
@@ -94,6 +105,8 @@ class PostQuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = PostQuestion::findOrFail($id)->delete();
+
+        return ['message' => 'Postingan berhasil dihapus!'];
     }
 }

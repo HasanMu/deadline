@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+        $all_post = \App\PostQuestion::with('user', 'category', 'tags')->orderBy('created_at')->paginate(5);
+
+        return view('frontend.index', compact('all_post'));
     }
 }

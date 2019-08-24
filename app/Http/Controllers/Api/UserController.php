@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -83,5 +84,23 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function isLogged(){
+        $isLogged = Auth::check();
+        $user = true;
+
+        if(!$isLogged){
+            $user = [
+                'id'  => Auth::user()
+            ];
+        }
+
+        $response = [
+            'stats' => $isLogged,
+            'user'  => $user
+        ];
+
+        return response()->json($response, 200);
     }
 }

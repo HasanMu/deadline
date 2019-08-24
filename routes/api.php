@@ -24,4 +24,5 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
     Route::group(['prefix' => 'post'], function () {
         Route::apiResource('/questions', 'Api\PostQuestionController');
     });
+    Route::get('/isLogged', 'Api\UserController@isLogged');
 });

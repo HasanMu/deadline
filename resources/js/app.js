@@ -8,6 +8,25 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VueRouter from 'vue-router'
+import { Form, HasError, AlertError } from 'vform'
+import App from './components/HComponent'
+
+window.Form = Form;
+window.Fire = new Vue();
+
+Vue.use(VueRouter)
+
+
+let routes = [
+    { path: '/', component: require('./components/HomeComponent.vue').default, props: true },
+  ]
+
+const router = new VueRouter({
+    mode: 'history', // Untuk menghapus semua awalan url [Ex: ujikom.test/home#/dashboard => ujikom.test/dashboard]
+    routes // short for `routes: routes`
+})
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,7 +38,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('h-component', require('./components/HComponent.vue'));
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +51,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    components: { App },
+    router,
 });
