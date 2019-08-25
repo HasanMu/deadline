@@ -10,4 +10,9 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\PostQuestion', 'postsquestions_tags', 'tags_id', 'postquestion_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

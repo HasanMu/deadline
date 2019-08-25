@@ -40,10 +40,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="/kelas">{{ __('Kelas') }}</a>
-                        </li>
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -65,7 +61,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/admin/profile">
+                                    <a class="dropdown-item" href="/myprofile">
                                         <i class="fas fa-user"></i> Profile</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

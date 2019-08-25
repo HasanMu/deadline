@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('title') Data Tags @endsection
-@section('add') Data Tags @endsection
+@section('title') Data Pertanyaan @endsection
+@section('add') Data Pertanyaan @endsection
 
 @section('content')
     @include('admin.postquestions.modal')
@@ -19,7 +19,6 @@
                         <table id="dataTable" class="table table-bordered table-hover">
                             <thead>
                                 <th>Judul</th>
-                                <th>Foto</th>
                                 <th>Author</th>
                                 <th>Kategori</th>
                                 <th>Tag</th>
@@ -82,7 +81,7 @@
     <script src="{{ asset('backend/ckeditor5-build-decoupled-document/ckeditor.js') }}">
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('backend/dist/js/demo.js') }}"></script>
-    
+
 
     <script type="text/javascript">
         $(function () {
@@ -103,7 +102,6 @@
                 ajax: "{{ route('admin.questions.index') }}",
                 columns: [
                     {data: 'judul', name: 'judul'},
-                    {data: 'img', name: 'foto'},
                     {data: 'user.name', name: 'user.name'},
                     {data: 'category.nama', name: 'category.nama'},
                     {data: 'tags', name: 'tags.nama'},

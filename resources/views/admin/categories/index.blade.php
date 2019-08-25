@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('title') Data Users @endsection
-@section('add') Data Users @endsection
+@section('title') Data Kategori @endsection
+@section('add') Data Kategori @endsection
 
 @section('content')
     @include('admin.categories.modal')
@@ -75,7 +75,7 @@
 
     <script type="text/javascript">
         $(function () {
-            
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -110,7 +110,7 @@
                     error: function (err) {
                         console.log(err)
                     }
-                })  
+                })
             })
 
             $('.data-categories').on('click', '.edit-kategori-per-id', function (e) {
@@ -177,7 +177,7 @@
                     success: function (res) {
                         alert('Data berhasil dihapus')
                         location.reload();
-                    }, 
+                    },
                     error: function (err) {
                         console.log(err)
                     }

@@ -34,12 +34,6 @@ class PostQuestionController extends Controller
 
                             return $btn;
                     })
-                    ->addColumn('img', function($row){
-
-                            $img = '<img src="/assets/questions/img/'.$row->foto.'" class="margin" widht="100px" height="100px">';
-
-                            return $img;
-                    })
                     ->addColumn('tags', function(PostQuestion $pq) {
                         return $pq->tags->pluck('nama')->implode('<br>');
                     })

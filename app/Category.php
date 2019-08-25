@@ -10,4 +10,9 @@ class Category extends Model
     {
         return $this->hasMany('App\PostQuestion', 'category_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

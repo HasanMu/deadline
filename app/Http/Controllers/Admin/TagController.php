@@ -28,7 +28,7 @@ class TagController extends Controller
 
                            $btn = '<button type="button" class="edit-tag-per-id btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-tag" data-id="'.$row->id.'"><i class="fa fa-edit"></i></button>';
                            $btn = $btn.' <button type="button" class="hapus-tag-per-id btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus-tag" data-id="'.$row->id.'" data-nama="'.$row->nama.'"><i class="fa fa-trash-o"></i></button>';
-     
+
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -55,12 +55,13 @@ class TagController extends Controller
                     'success' => false,
                     'message' => 'Data Tag tidak boleh ada yang sama!'
                 ];
-        
+
                 return response()->json($response, 200);
             }
         }
 
         $tag->nama = $request->nama;
+        $tag->slug = str_slug($request->nama);
         $tag->save();
 
         $response = [
@@ -109,12 +110,13 @@ class TagController extends Controller
                     'success' => false,
                     'message' => 'Data Tag tidak boleh ada yang sama!'
                 ];
-        
+
                 return response()->json($response, 200);
             }
         }
 
         $tag->nama = $request->nama;
+        $tag->slug = str_slug($request->nama);
         $tag->save();
 
         $response = [
@@ -134,7 +136,19 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $tag = Tag::findOrFail($id)->delete();
+        $tag = Tag::with('postquestion')->findOrFail($id);
+
+        if($tag->postquestion->count() > 0){
+            $response = [
+                'success'   => true,
+                'data'      => $tag,
+                'message'   => 'Gagal dihapus! Karena Tag Masih Dipakai oleh beberapa postingan'
+            ];
+
+            return response()->json($response, 200);
+        }
+
+        $tag->delete();
 
         $response = [
             'success'   => true,

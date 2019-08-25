@@ -1,5 +1,5 @@
 <?php
-
+use App\Category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +15,9 @@ Auth::routes();
 
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('category/{category}', 'HomeController@postCategory');
+Route::get('tag/{tag}', 'HomeController@postTag');
+Route::get('/myprofile', 'HomeController@profile');
 
 //
 Route::get('/user/logout', 'Auth\LoginController@logoutUser')->name('user.logout');

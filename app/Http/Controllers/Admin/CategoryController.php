@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
                            $btn = '<button type="button" class="edit-kategori-per-id btn btn-primary btn-sm" data-toggle="modal" data-target="#edit-kategori" data-id="'.$row->id.'"><i class="fa fa-edit"></i></button>';
                            $btn = $btn.' <button type="button" class="hapus-kategori-per-id btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus-kategori" data-id="'.$row->id.'" data-nama="'.$row->nama.'"><i class="fa fa-trash-o"></i></button>';
-     
+
                             return $btn;
                     })
                     ->rawColumns(['action'])
@@ -56,12 +56,13 @@ class CategoryController extends Controller
                     'success' => false,
                     'message' => 'Data Kategori tidak boleh ada yang sama!'
                 ];
-        
+
                 return response()->json($response, 200);
             }
         }
-        
+
         $cat->nama = $request->nama;
+        $cat->slug = str_slug($request->nama);
         $cat->save();
 
         $response = [
@@ -104,6 +105,7 @@ class CategoryController extends Controller
         $cat = Category::findOrFail($id);
 
         $cat->nama = $request->nama;
+        $cat->slug = str_slug($request->nama);
         $cat->save();
 
         $response = [

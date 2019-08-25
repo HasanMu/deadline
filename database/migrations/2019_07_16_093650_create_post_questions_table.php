@@ -16,7 +16,6 @@ class CreatePostQuestionsTable extends Migration
         Schema::create('post_questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('judul');
-            $table->string('foto')->nullable();
             $table->text('konten');
             $table->enum('status', ['Belum Terjawab', 'Kurang Puas', 'Terjawab'])->default('Belum Terjawab');
             $table->unsignedBigInteger('user_id');

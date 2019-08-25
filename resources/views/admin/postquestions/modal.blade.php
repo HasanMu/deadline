@@ -1,7 +1,7 @@
 <div class="modal fade" id="create-postquestion">
     <div class="modal-dialog">
         <form id="c-pq" enctype="multipart/form-data">
-            
+
             <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -16,10 +16,6 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1">Judul</label>
                     <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul Pertanyaan">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Foto</label>
-                    <input type="file" class="form-control" id="foto" name="foto">
                 </div>
                 <div class="form-group">
                     <div class="toolbar-container"></div>

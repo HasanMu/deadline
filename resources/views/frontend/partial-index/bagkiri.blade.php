@@ -15,8 +15,11 @@
     <div class="card bg-light mb-3">
         <div class="card-header text-center">{{ Auth::user()->name }}</div>
             <div class="card-body">
-                <h5 class="card-title">Light card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <center>
+                    <img src="{{ asset('assets/deafult-avatar.png') }}" class="col-md-6 card-img" alt="..." height="100px">
+                </center>
+                <p class="card-text">Alamat &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : {{(Auth::user()->address) ? Auth::user()->address : 'Bandung, Jawa Barat'}}</p>
+                <p class="card-text">Jenis Kelamin : {{ Auth::user()->gender }}</p>
             </div>
     </div>
 @endguest

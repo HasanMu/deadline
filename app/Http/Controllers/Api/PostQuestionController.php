@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PostQuestion;
+use App\Tag;
 
 class PostQuestionController extends Controller
 {
@@ -74,11 +75,13 @@ class PostQuestionController extends Controller
     {
         $data = PostQuestion::with('user', 'category', 'tags')->findOrFail($id);
         $categories = Category::all();
+        $tags = Tag::all();
 
         $response = [
             'success'   => true,
             'data'      => $data,
             'data_cat'  => $categories,
+            'data_tag'  => $tags,
             'message'   => 'Data postingan '.$data->judul
         ];
 
@@ -94,7 +97,22 @@ class PostQuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return ['message' => 'Masuk update!'];
+        $update_post = PostQuestion::findOrFail($request->id);
+
+        $update_post->status = $request->status_pq;
+        $update_post->judul = $request->judul_pq;
+        if($request->konten_pq==''):
+            $update_post->konten = $update_post->konten;
+        else:
+            $update_post->konten = $request->konten_pq;
+        endif;
+        $update_post->category_id = $request->category_pq;
+        $update_post->save();
+
+        $update_post->tags()->sync($request->tags);
+
+
+        return redirect('/');
     }
 
     /**
