@@ -23,4 +23,9 @@ class PostQuestion extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'postquestion_id');
+    }
 }

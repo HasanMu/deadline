@@ -40,16 +40,16 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ (Request::segment(3) == 'questions') ? 'active' : '' }}"><a href="{{ route('admin.questions.index') }}"><i class="fa fa-circle-o"></i>Pertanyaan</a></li>
-            <li class="{{ (Request::segment(3) == 'class') ? 'active' : '' }}"><a href="{{ route('admin.questions.index') }}"><i class="fa fa-circle-o"></i>Kelas</a></li>
+            {{-- <li class="{{ (Request::segment(3) == 'class') ? 'active' : '' }}"><a href="{{ route('admin.questions.index') }}"><i class="fa fa-circle-o"></i>Kelas</a></li> --}}
           </ul>
         </li>
 
-        <li class="treeview">
+        {{-- <li class="treeview">
             <a href="pages/widgets.html">
               <i class="fa fa-edit"></i> <span>Posts Blog</span>
             </a>
-        </li>
-        <li class="{{ (Request::segment(2) == 'comments' || Request::segment(3) == 'comments') ? 'active treeview menu-open' : 'treeview' }}">
+        </li> --}}
+        {{-- <li class="{{ (Request::segment(2) == 'comments' || Request::segment(3) == 'comments') ? 'active treeview menu-open' : 'treeview' }}">
           <a href="#">
             <i class="fa fa-edit"></i>
             <span>Comments</span>
@@ -61,7 +61,7 @@
             <li class="{{ (Request::segment(3) == 'comments') ? 'active' : '' }}"><a href="{{ route('admin.questions.index') }}"><i class="fa fa-circle-o"></i>Pertanyaan</a></li>
             <li class="{{ (Request::segment(3) == 'comments') ? 'active' : '' }}"><a href="{{ route('admin.questions.index') }}"><i class="fa fa-circle-o"></i>Kelas</a></li>
           </ul>
-        </li>
+        </li> --}}
         <li class="{{ (Request::segment(2) == 'categories' || Request::segment(2) == 'tags') ? 'active treeview menu-open' : 'treeview' }}">
           <a href="#">
             <i class="fa fa-cog"></i>

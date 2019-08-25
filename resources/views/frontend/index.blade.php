@@ -115,6 +115,34 @@
             })
         })
 
+        // Form Kirim Komentar
+        for (let i = 0; i <= 1000; i++) {
+            $('#kirim-komentar-'+i).on('click', function (e) {
+                e.preventDefault();
+
+                var user_id = $('#id_user_comment').val();
+                var pq_id = $('#id_pq-'+i).val();
+                $.ajax({
+                    url: '/api/v1/comments',
+                    method: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pq_id: pq_id,
+                        konten: $('#konten-komentar-'+i).val()
+                    },
+                    dataType: 'JSON',
+                    success: function(res) {
+                        alert(res.message)
+                        location.reload();
+                    },
+                    error: function(err) {
+                        console.log(err);
+
+                    }
+                })
+            })
+        }
+
         // Add-on
         $('.edit-tags-pq').select2();
         $('.buat-tags-pq').select2();

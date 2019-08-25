@@ -21,6 +21,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
     Route::apiResource('/users', 'Api\UserController');
     Route::apiResource('/categories', 'Api\CategoryController');
     Route::apiResource('/tags', 'Api\TagController');
+    Route::apiResource('/comments', 'Api\CommentController');
     Route::group(['prefix' => 'post'], function () {
         Route::apiResource('/questions', 'Api\PostQuestionController');
     });

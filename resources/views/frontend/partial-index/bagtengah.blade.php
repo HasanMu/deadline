@@ -36,8 +36,27 @@
                     @endforeach
                     <p class="card-text">{{ $post->konten }}</p>
                 </div>
-                <div class="card-footer bg-transparent border-light">
-                    <i class="far fa-comments"></i> 0 Komentar
+                <div class="card-footer bg-transparent border-light"   data-toggle="collapse" data-target="#komentar-{{$loop->iteration}}" aria-expanded="false" aria-controls="komentar-{{$loop->iteration}}">
+                    <i class="far fa-comments"></i> {{$post->comments->count()}} Komentar
+                </div>
+
+                <div class="collapse" id="komentar-{{$loop->iteration}}">
+                    <div class="card card-body">
+                        @php
+                            $comments = \App\Comment::with('user', 'postquestion')->latest()->get();
+                        @endphp
+
+                        @foreach($comments as $comm)
+                            <div class="media">
+                                <img src="{{ asset('assets/deafult-avatar.png') }}" class="mr-3" alt="..." style="width: 30px; height: 30px;">
+                                <div class="media-body">
+                                    <h5 class="mt-0">{{ $comm->user->name }}</h5>
+                                    {{ $comm->konten }}
+                                </div>
+                            </div>
+                            <hr>
+                        @endforeach
+                    </div>
                 </div>
         </div>
     @endforeach
@@ -93,8 +112,39 @@
                     @endforeach
                     <p class="card-text">{{ $post->konten }}</p>
                 </div>
-                <div class="card-footer bg-transparent border-light">
-                    <i class="far fa-comments"></i> 0 Komentar
+                <div class="card-footer bg-transparent border-light"   data-toggle="collapse" data-target="#komentar-{{$loop->iteration}}" aria-expanded="false" aria-controls="komentar-{{$loop->iteration}}">
+                    <i class="far fa-comments"></i> {{$post->comments->count()}} Komentar
+                </div>
+
+                <div class="collapse" id="komentar-{{$loop->iteration}}">
+                    <input type="hidden" id="id_pq-{{$loop->iteration}}" value="{{$post->id}}">
+                    <input type="hidden" name="id_user_comment" id="id_user_comment" value="{{Auth::user()->id}}">
+                    <div class="card card-body">
+                        <div class="input-group">
+                            <textarea class="form-control" aria-label="With textarea" id="konten-komentar-{{$loop->iteration}}"></textarea>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text btn btn-primary" type="button" id="kirim-komentar-{{$loop->iteration}}">
+                                    Kirim
+                                </span>
+                            </div>
+                        </div>
+                        <hr>
+
+                        @php
+                            $comments = \App\Comment::with('user', 'postquestion')->latest()->get();
+                        @endphp
+
+                        @foreach($comments as $comm)
+                            <div class="media">
+                                <img src="{{ asset('assets/deafult-avatar.png') }}" class="mr-3" alt="..." style="width: 30px; height: 30px;">
+                                <div class="media-body">
+                                    <h5 class="mt-0">{{ $comm->user->name }}</h5>
+                                    {{ $comm->konten }}
+                                </div>
+                            </div>
+                            <hr>
+                        @endforeach
+                    </div>
                 </div>
         </div>
     @endforeach
