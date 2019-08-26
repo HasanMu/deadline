@@ -47,14 +47,16 @@
                         @endphp
 
                         @foreach($comments as $comm)
-                            <div class="media">
-                                <img src="{{ asset('assets/deafult-avatar.png') }}" class="mr-3" alt="..." style="width: 30px; height: 30px;">
-                                <div class="media-body">
-                                    <h5 class="mt-0">{{ $comm->user->name }}</h5>
-                                    {{ $comm->konten }}
+                            @if($comm->postquestion_id == $post->id)
+                                <div class="media">
+                                    <img src="{{ asset('assets/deafult-avatar.png') }}" class="mr-3" alt="..." style="width: 30px; height: 30px;">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">{{ $comm->user->name }}</h5>
+                                        {{ $comm->konten }}
+                                    </div>
                                 </div>
-                            </div>
-                            <hr>
+                                <hr>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -135,6 +137,7 @@
                         @endphp
 
                         @foreach($comments as $comm)
+                            @if($comm->postquestion_id == $post->id)
                             <div class="media">
                                 <img src="{{ asset('assets/deafult-avatar.png') }}" class="mr-3" alt="..." style="width: 30px; height: 30px;">
                                 <div class="media-body">
@@ -143,6 +146,7 @@
                                 </div>
                             </div>
                             <hr>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -168,7 +172,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="kategori">Status</label>
-                            <select name="status_pq" id="status-pq" class="custom-select">
+                            <select name="status_pq" id="buat-status-pq" class="custom-select">
                                 <option value="Belum Terjawab">Belum Terjawab</option>
                                 <option value="Kurang Puas">Kurang Puas</option>
                                 <option value="Terjawab">Terjawab</option>
@@ -176,18 +180,18 @@
                         </div>
                         <div class="form-group">
                             <label for="judul-pq">Judul</label>
-                            <input id="judul-pq" class="form-control" type="text" name="judul_pq">
+                            <input id="buat-judul-pq" class="form-control" type="text" name="judul_pq">
                         </div>
                         <div class="form-group">
                             <label for="konten-pq">Konten</label>
-                            <textarea id="texteditor" rows="4" cols="30" class="form-control editor1" type="text" name="konten_pq"></textarea>
+                            <textarea id="buat-konten-pq" rows="4" cols="30" class="form-control editor1" type="text" name="konten_pq"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="kategori">Kategori</label>
                             @php
                                 $datas_cat = \App\Category::get();
                             @endphp
-                            <select name="category_pq" id="category-pq" class="custom-select">
+                            <select name="category_pq" id="category-pq" class="custom-select buat-kategori-pq">
                                 @foreach ($datas_cat as $cat)
                                     <option value="{{ $cat->id }}">{{ $cat->nama }}</option>
                                 @endforeach
@@ -199,7 +203,7 @@
                                 @php
                                     $datas_tag = \App\Tag::get();
                                 @endphp
-                                <select name="tags[]" id="buat-tags-pq" class="custom-select buat-tags-pq" multiple>
+                                <select name="tags[]" id="buat-tags-pq" class="custom-select buat-tag-pq" multiple>
                                     @foreach ($datas_tag as $tag)
                                         <option value="{{ $tag->id }}">{{ $tag->nama }}</option>
                                     @endforeach

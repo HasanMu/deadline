@@ -143,9 +143,25 @@
             })
         }
 
+        $('#form-c-pq').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/api/v1/post/questions',
+                method: 'POST',
+                dataType: 'JSON',
+                data: {
+                    judul: $('#buat-judul-pq').val(),
+                    status: $('#buat-status-pq option:selected').attr('value'),
+                    konten: $('#buat-konten-pq').html(),
+                    kategori: $('#buat-kategori-pq option:selected').attr('value'),
+                    tag: $('.buat-tag-pq option:selected').attr('value')
+                }
+            })
+        })
         // Add-on
         $('.edit-tags-pq').select2();
         $('.buat-tags-pq').select2();
-        CKEDITOR.replace('texteditor', 'e-texteditor')
+        CKEDITOR.replace('buat-konten-pq', 'e-texteditor')
     </script>
 @endpush
